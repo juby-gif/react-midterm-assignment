@@ -1,0 +1,98 @@
+.login {
+  border: 1px solid rgba(255,255,255,0.3);
+  padding:20%;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+  h1{
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+  font-family:fantasy;
+  }
+  table{
+  width:76%;
+  table-layout: fixed;
+  margin-left: 10%;
+  }
+  .table-header{
+  background-color: rgba(255,255,255,0.3);
+  }
+  .table-content{
+  height:20%;
+  overflow-x:auto;
+  margin-top: 2%;
+  border: 1px solid rgba(255,255,255,0.3);
+  }
+  th{
+  padding: 2% 1.5%;
+  text-align: center;
+  font-weight: 500%;
+  font-size: 80%;
+  color: black;
+  text-transform: uppercase;
+  }
+  td{
+  padding: 1%;
+  text-align: center;
+  vertical-align:middle;
+  font-weight: 300%;
+  font-size: 89%;
+  color: #fff;
+  border-bottom: solid 3px rgba(255,255,255,0.1);
+  }
+
+  button{
+    background: lightGray;
+    width:12%;
+    font-size: 76%;
+    font-weight: 900;
+    border-radius: 5px;
+    margin-left: 46%;
+    margin-top: 10px;
+  }
+  button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 2px #666;
+    transform: translateY(3px);
+  }
+  button:hover {
+    background-color: #003300;
+    color: white;
+  }
+
+  /* @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700); */
+  body{
+  background: -webkit-linear-gradient(left, #25d481, #25b7c4);
+  background: linear-gradient(to right, #25c481, #25b7c4);
+  font-family: 'Roboto', sans-serif;
+  }
+div .row{border-style: solid;
+}
+input {
+width: 43%;
+margin-left: 28%;
+background: rgba(1,0,1,0.6);
+border: none;
+outline: none;
+padding: 1%;
+font-size: 90%;
+color: beige;
+text-shadow: 12% 12% 12% rgba(0,0,0,0.3);
+border: 12% solid rgba(0,0,0,0.3);
+border-radius: 4%;
+box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+-webkit-transition: box-shadow .5s ease;
+-moz-transition: box-shadow .5s ease;
+-o-transition: box-shadow .5s ease;
+-ms-transition: box-shadow .5s ease;
+transition: box-shadow .5s ease;
+}
+input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
+.validation-error{
+  color: #D8000C;
+  background-color: #FFD2D2;
+  width:49%;
+}
