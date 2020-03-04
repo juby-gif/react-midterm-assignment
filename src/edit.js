@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import { LIST_PAGE_ID } from './constants';
 import './App.css';
+import TreeDAO from './models/treeDAO';
 
 export default class UpdateView extends Component{
   constructor(props){
     super(props);
-    let treeObj;
-    let treeArr = JSON.parse(localStorage.getItem("Tree_Arr"));
-    for (treeObj of treeArr){
-      if(treeObj.id === props.id){
-        console.log(treeObj);
-        localStorage.setItem("Tree_Object",JSON.stringify(treeObj));
-        break;
-      }
-    }
+    const treeDAO = new TreeDAO();
+    const slug = props.slug;
+    let treeObj = treeDAO.getTreeObj(slug)
+    const treeArr = treeDAO.getList();
+
+
     this.state={
       error:"",
       message:"",
+      slug:slug,
+      treeDAO:treeDAO,
       treeArr:treeArr,
       name:treeObj.name,
       scientificName:treeObj.scientificName,
-      treeImageURL:treeObj.treeImageUrl,
-      seedImageURL:treeObj.seedImageUrl,
-      description:treeObj.shortDescription,
+      treeImageURL:treeObj.treeImageURL,
+      seedImageURL:treeObj.seedImageURL,
+      description:treeObj.description,
     }
     this.onBackClick=this.onBackClick.bind(this);
     this.onNameChange=this.onNameChange.bind(this);
@@ -91,24 +91,9 @@ onDescriptionChange(event){
   })
 }
 onUpdateClick(event){
-  const { name,scientificName,treeImageURL,seedImageURL,description } = this.state;
-  let treeArr = JSON.parse(localStorage.getItem("Tree_Arr"));
-  let treeObj;
-  for (treeObj of treeArr){
-    if(treeObj.id === this.props.id){
-      treeObj.name = name;
-      treeObj.scientificName = scientificName;
-      treeObj.treeImageUrl = treeImageURL;
-      treeObj.seedImageUrl = seedImageURL;
-      treeObj.shortDescription = description;
-      localStorage.setItem("Tree_Object",JSON.stringify(treeObj))
-      break;
-    }
-}
-localStorage.setItem("Tree_Arr",JSON.stringify(treeArr));
-console.log(treeArr)
-alert("Successfully Updated")
-this.props.onPageChange(LIST_PAGE_ID);
+  const { slug,name,scientificName,treeImageURL,seedImageURL,description,treeDAO } = this.state;
+  treeDAO.onUpdateTree(slug,name,scientificName,treeImageURL,seedImageURL,description);
+  this.props.onPageChange(LIST_PAGE_ID);
 }
 
 render(){

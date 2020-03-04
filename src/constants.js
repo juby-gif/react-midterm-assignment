@@ -3,6 +3,7 @@ export const REGISTER_PAGE_ID = "register";
 export const LIST_PAGE_ID = "list";
 export const EDIT_PAGE_ID = "edit";
 export const VIEW_PAGE_ID = "view";
+export const CREATE_PAGE_ID = "create";
 export const TREE_ARR = [
   {
     id: 1,

@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 import { LIST_PAGE_ID } from './constants';
 import './App.css';
+import TreeDAO from './models/treeDAO';
 
 export default class DetailView extends Component{
   constructor(props){
     super(props);
-    let id = props.id;
-    let treeArr = JSON.parse(localStorage.getItem("Tree_Arr"));
-    let treeObj;
-    for (treeObj of treeArr){
-      if(treeObj.id === id){
-        break;
-      }
-    }
+    const treeDAO = new TreeDAO();
+    const treeArr = treeDAO.getList();
+    const slug = props.slug;
+    console.log(slug)
+    let treeObj = treeDAO.getTreeObj(slug);
+    console.log(treeObj)
+
     this.state = {
       treeArr : treeArr,
-      id : id,
+      slug : slug,
       name : treeObj.name,
       scientificName : treeObj.scientificName,
-      treeImageUrl : treeObj.treeImageUrl,
-      seedImageUrl : treeObj.seedImageUrl,
-      shortDescription : treeObj.shortDescription,
+      treeImageUrl : treeObj.treeImageURL,
+      seedImageUrl : treeObj.seedImageURL,
+      shortDescription : treeObj.description,
     }
     this.onBackClick= this.onBackClick.bind(this);
 
@@ -31,7 +31,7 @@ onBackClick(event){
 }
 
 render(){
-    const { treeArr,id,name,scientificName,treeImageUrl,seedImageUrl,shortDescription } = this.state;
+    const { treeArr,slug,name,scientificName,treeImageUrl,seedImageUrl,shortDescription } = this.state;
     return(
       <div>
 

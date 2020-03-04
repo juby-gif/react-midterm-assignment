@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { LOGIN_PAGE_ID,EDIT_PAGE_ID,VIEW_PAGE_ID } from './constants';
+import { LOGIN_PAGE_ID,EDIT_PAGE_ID,VIEW_PAGE_ID,CREATE_PAGE_ID } from './constants';
 import './App.css';
+import TreeDAO from './models/treeDAO';
 
 
 export default class ListView extends Component{
   constructor(props){
     super(props);
-    let treeArr = JSON.parse(localStorage.getItem("Tree_Arr"));
-
+    const treeDAO = new TreeDAO();
+    const treeArr = treeDAO.getList();
     this.state={
       treeArr : treeArr,
       searchTerm:"",
@@ -18,13 +19,13 @@ export default class ListView extends Component{
     this.onSearchChange=this.onSearchChange.bind(this);
     this.onLogoutClick=this.onLogoutClick.bind(this);
   }
-onViewClick(event,id){
+onViewClick(event,slug){
   event.preventDefault();
-  this.props.onPageChange(VIEW_PAGE_ID,id);
+  this.props.onPageChange(VIEW_PAGE_ID,slug);
 }
-onEditClick(event,id){
+onEditClick(event,slug){
   event.preventDefault();
-  this.props.onPageChange(EDIT_PAGE_ID,id)
+  this.props.onPageChange(EDIT_PAGE_ID,slug)
 }
 onSearchChange(event){
   this.setState({
@@ -33,19 +34,21 @@ onSearchChange(event){
 
 }
 onLogoutClick(event){
+  event.preventDefault();
   localStorage.removeItem("Logged-in-User");
   this.setState({
     loggedInUser:"",
   })
   this.props.onPageChange(LOGIN_PAGE_ID);
 }
+onCreateClick(event){
+  event.preventDefault();
+  this.props.onPageChange(CREATE_PAGE_ID);
+}
 
   render(){
     const { treeArr,searchTerm,loggedInUser } = this.state;
-    const filteredTreesArr = treeArr.filter(
-      (treeObj)=>
-            treeObj.name.toLowerCase().includes( searchTerm.toLowerCase() )
-    )
+    const filteredTreesArr = treeArr;
       return(
         <div>
            <p style={{margin:"2%"}}>Welcome <b><em>{loggedInUser.firstName}</em></b>,</p>
@@ -65,6 +68,7 @@ onLogoutClick(event){
               <TreeList treeArr={filteredTreesArr} onViewClick={this.onViewClick} onEditClick={this.onEditClick}/>
               <br />
               <br />
+              <button style={{width:"8%",marginTop:"1%",marginBottom:"20%",marginLeft:"12%"}}onClick={(event)=>this.onCreateClick(event)}>Create Tree</button>
               <br />
               <br />
               <br />
@@ -82,8 +86,8 @@ function TreeList(props){
     <tr className="table-content">
       <td>{treeObj.name}</td>
       <td>
-        <button style={{width:"20%"}} onClick={(event,id)=>{props.onViewClick(event,treeObj.id)}}>View</button>
-        <button style={{width:"20%"}} onClick={(event,id)=>{props.onEditClick(event,treeObj.id)}}>Edit</button>
+        <button style={{width:"20%"}} onClick={(event,slug)=>{props.onViewClick(event,treeObj.slug)}}>View</button>
+        <button style={{width:"20%"}} onClick={(event,slug)=>{props.onEditClick(event,treeObj.slug)}}>Edit</button>
       </td>
     </tr>
     )
