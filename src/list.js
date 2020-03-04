@@ -48,7 +48,11 @@ onCreateClick(event){
 
   render(){
     const { treeArr,searchTerm,loggedInUser } = this.state;
-    const filteredTreesArr = treeArr;
+    const filteredTreesArr = treeArr.filter(
+      (treeObj)=>
+            treeObj.name.toLowerCase().includes( searchTerm.toLowerCase() )
+    )
+
       return(
         <div>
            <p style={{margin:"2%"}}>Welcome <b><em>{loggedInUser.firstName}</em></b>,</p>
