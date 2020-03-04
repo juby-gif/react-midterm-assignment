@@ -44,25 +44,25 @@ onNameChange(event){
   if(event.target.value.length > 0){
       this.setState({
           name:event.target.value,
-
       })
+      let treeArr = this.state.treeArr;
+      let treeObj;
+      for(treeObj of treeArr){
+        if(treeObj.name.toLowerCase() === event.target.value.toLowerCase()){
+          this.setState({
+            message:"Tree Name Already Exists! Please Try another Name."
+          })
+          break;
+        }
+
+      }
   }
   else{
       this.setState({
         error:"Sorry tree name field cannot be empty!"
       })
 }
-let treeArr = this.state.treeArr;
-let treeObj;
-for(treeObj of treeArr){
-  if(treeObj.name.toLowerCase() === event.target.value.toLowerCase()){
-    this.setState({
-      message:"Tree Name Already Exists! Please Try another Name."
-    })
-    break;
-  }
 
-}
 
 }
 onScientificNameChange(event){
@@ -94,7 +94,7 @@ onCreateTreeClick(event){
 }
 
 render(){
-    const { name,scientificName,treeImageURL,seedImageURL,description,error } = this.state;
+    const { name,scientificName,treeImageURL,seedImageURL,description,error,message } = this.state;
     return(
       <div>
         <h1 style={{color:"beige",textShadow: "0 0 10px rgba(0,0,0,0.8)"}}>Create Tree</h1>
@@ -102,17 +102,19 @@ render(){
             {error}
         </div>
         <br />
+        {" "}{this.state.message === "Tree Name Already Exists! Please Try another Name." &&
+                <div className="validation-error">
+                    {message}
+                </div>
+                  }
+        <br />
         <input
             type="text"
             value={name}
             onChange = {(event)=>this.onNameChange(event)}
             placeholder = "Tree Name"
         />
-        {" "}{this.state.message === "Tree Name Already Exists! Please Try another Name." &&
-                <div className="validation-error">
-                    {error}
-                </div>
-                  }
+
 
         <br />
         <br />

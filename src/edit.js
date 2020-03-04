@@ -57,17 +57,7 @@ onNameChange(event){
         error:"Sorry tree name field cannot be empty!"
       })
 }
-let treeArr = this.state.treeArr;
-let treeObj;
-for(treeObj of treeArr){
-  if(treeObj.name.toLowerCase() === event.target.value.toLowerCase()){
-    this.setState({
-      message:"Tree Name Already Exists! Please Try another Name."
-    })
-    break;
-  }
 
-}
 
 }
 onScientificNameChange(event){
@@ -151,7 +141,7 @@ render(){
         />
         <br />
         <br />
-        <button style={{marginLeft:"40%"}} onClick={(event)=>this.onUpdateClick(event)}>Save</button>
+        <button style={{marginLeft:"40%"}} onClick={(event)=>this.onUpdateClick(event)}>Update</button>
         <br />
         <br />
         <br />

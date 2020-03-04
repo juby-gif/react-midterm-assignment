@@ -46,13 +46,21 @@ export default class TreeDAO {
     }
   }
   onUpdateTree(slug,name,scientificName,treeImageURL,seedImageURL,description){
+    alert(name)
     const treeArr = this.getList();
-    let treeObj = this.getTreeObj(slug);
-    treeObj.name = name;
-    treeObj.scientificName = scientificName;
-    treeObj.treeImageURL = treeImageURL;
-    treeObj.seedImageURL = seedImageURL;
-    treeObj.description = description;
+    let treeObj;
+    for(treeObj of treeArr){
+      if (treeObj.slug === slug){
+        console.log(treeObj)
+        treeObj.name = name;
+        treeObj.scientificName = scientificName;
+        treeObj.treeImageURL = treeImageURL;
+        treeObj.seedImageURL = seedImageURL;
+        treeObj.description = description;
+        break;
+      }
+    }
+
     localStorage.setItem(TREE_KEY,JSON.stringify(treeArr));
     alert("Successfully Updated");
   }
