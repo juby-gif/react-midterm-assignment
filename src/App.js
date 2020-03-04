@@ -11,7 +11,7 @@ export default class AppNavigation extends Component{
   constructor(props){
     super(props);
     let page = localStorage.getItem("TreePage");
-    const slug = JSON.parse(localStorage.getItem("Tree_Obj_id"));
+    const slug = localStorage.getItem("Tree_Obj_id");
     if(page === "" || page === null || page === undefined){
       page = LOGIN_PAGE_ID
     }
@@ -28,7 +28,7 @@ export default class AppNavigation extends Component{
       slug:slug,
     })
     localStorage.setItem("TreePage",page);
-    localStorage.setItem("Tree_Obj_id",JSON.stringify(slug))
+    localStorage.setItem("Tree_Obj_id",slug)
   }
   render(){
     const { page,slug } = this.state;
